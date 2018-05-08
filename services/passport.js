@@ -22,13 +22,19 @@ passport.use(
         callbackURL: '/auth/google/callback'
         }, 
         async (accessToken, refreshToken, profile, done)=> {
+            //console.log('profile', profile);
             const existingUser = await User.findOne({ googleId: profile.id })
                 if (existingUser){
                     //existing user exists with profile id
                    return done(null, existingUser);
                 }
                 //user record doesn't exists
-                const user = await new User({ googleId: profile.id }).save()
+                const user = await new User({ 
+                    googleId: profile.id,
+                    name: profile.displayName,
+                    email: profile.emails[0].value
+
+                }).save()
                 done(null,user);
         }
     )
