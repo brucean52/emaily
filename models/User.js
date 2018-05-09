@@ -9,4 +9,4 @@ const userSchema = new Schema({
     email: String
 });
 
-mongoose.model('users', userSchema);
+mongoose.model('testUsers', userSchema);
