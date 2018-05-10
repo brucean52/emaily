@@ -15,6 +15,7 @@ class App extends Component {
         this.props.fetchUser();
     }
     render(){
+        console.log(this.props);
         return (
             <div className="container">
                 <BrowserRouter>
@@ -27,7 +28,13 @@ class App extends Component {
                 </BrowserRouter>
             </div>
         );       
-    }
+    }   
 };
 
-export default connect(null, { fetchUser })(App);
+function mapStateToProps(state){
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps, { fetchUser })(App);
